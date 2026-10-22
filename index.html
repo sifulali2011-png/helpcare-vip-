@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="HelpCare VIP customer support portal. Submit a support request for deposits, withdrawals, payments and account access.">
+  <title>HelpCare VIP | Premium Support</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080909; --panel: #111211; --panel2: #171816;
+      --gold: #e8c46b; --gold2: #b98a32; --gold-soft: #f8e7b2;
+      --text: #f7f4ec; --muted: #aaa79e; --line: rgba(232,196,107,.2);
+      --success: #8de0ad; --danger: #ff9c91;
+      --radius: 22px; --shadow: 0 18px 55px rgba(0,0,0,.38);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "DM Sans", sans-serif; color: var(--text); background:
+      radial-gradient(ellipse at 80% 0%, rgba(185,138,50,.12), transparent 35%),
+      radial-gradient(ellipse at 0% 40%, rgba(232,196,107,.045), transparent 30%), var(--bg);
+      min-height: 100vh; overflow-x: hidden;
+    }
+    body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:-1; opacity:.14;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+      background-size: 48px 48px; mask-image: linear-gradient(to bottom, black, transparent 80%); }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button { cursor:pointer; }
+    .wrap { width:min(1160px, calc(100% - 40px)); margin-inline:auto; }
+    .topline { height:3px; background:linear-gradient(90deg,transparent,var(--gold),var(--gold-soft),var(--gold2),transparent); }
+    header { position:sticky; top:0; z-index:50; background:rgba(8,9,9,.82); backdrop-filter:blur(18px); border-bottom:1px solid rgba(232,196,107,.13); }
+    .nav { min-height:78px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { display:flex; align-items:center; gap:12px; font-family:Manrope,sans-serif; font-weight:800; letter-spacing:-.5px; }
+    .brand-mark { width:42px; height:42px; display:grid; place-items:center; border:1px solid var(--gold); border-radius:13px; color:var(--gold-soft); background:linear-gradient(145deg,rgba(232,196,107,.2),rgba(185,138,50,.04)); box-shadow:0 0 24px rgba(232,196,107,.12), inset 0 0 15px rgba(232,196,107,.07); font-size:21px; }
+    .brand-name { font-size:19px; } .brand-name span { color:var(--gold); }
+    .nav-links { display:flex; align-items:center; gap:28px; color:#c7c2b6; font-size:13px; }
+    .nav-links a:hover { color:var(--gold-soft); }
+    .nav-cta,.btn { border:1px solid var(--gold); color:#17130a; background:linear-gradient(135deg,var(--gold-soft),var(--gold2)); padding:12px 18px; border-radius:12px; font-weight:800; font-size:13px; box-shadow:0 0 24px rgba(232,196,107,.14); transition:transform .2s, box-shadow .2s, filter .2s; }
+    .nav-cta:hover,.btn:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(232,196,107,.22); filter:brightness(1.05); }
+    .menu-toggle { display:none; background:none; border:1px solid var(--line); color:var(--gold); border-radius:10px; padding:9px 12px; }
+    .hero { display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:48px; padding:74px 0 72px; min-height:590px; }
+    .eyebrow { display:inline-flex; align-items:center; gap:9px; padding:8px 12px; border:1px solid var(--line); border-radius:999px; background:rgba(232,196,107,.06); color:var(--gold-soft); text-transform:uppercase; letter-spacing:1.7px; font-size:10px; font-weight:800; }
+    .pulse { width:7px; height:7px; border-radius:50%; background:#8de0ad; box-shadow:0 0 12px #8de0ad; }
+    h1,h2,h3 { font-family:Manrope,sans-serif; }
+    h1 { font-size:clamp(40px,5.5vw,68px); line-height:1.04; letter-spacing:-2.8px; margin:22px 0 20px; max-width:650px; }
+    .gold-text { color:var(--gold); text-shadow:0 0 28px rgba(232,196,107,.12); }
+    .hero-copy { color:#b9b6ad; font-size:16px; line-height:1.8; max-width:520px; }
+    .hero-actions { display:flex; gap:13px; flex-wrap:wrap; margin-top:29px; }
+    .btn-outline { background:transparent; border:1px solid rgba(232,196,107,.42); color:var(--gold-soft); padding:12px 18px; border-radius:12px; font-size:13px; font-weight:700; transition:.2s; }
+    .btn-outline:hover { background:rgba(232,196,107,.08); border-color:var(--gold); }
+    .trust-row { display:flex; gap:22px; flex-wrap:wrap; margin-top:34px; color:#a9a69d; font-size:11px; }
+    .trust-row span { display:flex; align-items:center; gap:7px; } .check { color:var(--gold); font-weight:900; }
+    .hero-visual { position:relative; min-height:430px; display:flex; align-items:center; justify-content:center; }
+    .photo-frame { width:min(100%,440px); height:430px; position:relative; border-radius:30px; overflow:hidden; border:1px solid rgba(232,196,107,.48); background:linear-gradient(145deg,#29251b,#101110 55%,#352713); box-shadow:0 0 0 8px rgba(232,196,107,.025),0 0 70px rgba(232,196,107,.12),var(--shadow); }
+    .photo-frame::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 45%,rgba(5,5,5,.8)),linear-gradient(90deg,rgba(232,196,107,.12),transparent 40%); pointer-events:none; }
+    .photo-frame img { width:100%; height:100%; object-fit:cover; object-position:center 30%; display:block; filter:saturate(.78) contrast(1.04); }
+    .photo-placeholder { height:100%; display:none; align-items:center; justify-content:center; flex-direction:column; gap:14px; color:var(--gold-soft); text-align:center; padding:28px; }
+    .photo-placeholder .avatar { width:120px; height:120px; border-radius:50%; display:grid; place-items:center; border:1px solid var(--gold); background:rgba(232,196,107,.08); font-size:54px; }
+    .photo-placeholder small { color:var(--muted); line-height:1.6; max-width:260px; }
+    .floating-card { position:absolute; z-index:2; padding:15px 17px; border-radius:16px; border:1px solid rgba(232,196,107,.35); background:rgba(17,18,17,.92); backdrop-filter:blur(14px); box-shadow:0 14px 36px rgba(0,0,0,.4); }
+    .floating-card strong { display:block; font-size:13px; margin-bottom:4px; } .floating-card small { color:var(--muted); font-size:11px; }
+    .floating-top { top:35px; left:-28px; } .floating-bottom { right:-22px; bottom:38px; display:flex; align-items:center; gap:11px; }
+    .float-icon { width:36px; height:36px; display:grid; place-items:center; border-radius:11px; color:var(--gold); background:rgba(232,196,107,.1); font-size:17px; }
+    .ring { position:absolute; width:470px; height:470px; border:1px solid rgba(232,196,107,.1); border-radius:50%; z-index:-1; animation:rotate 35s linear infinite; }
+    .ring::before,.ring::after { content:""; position:absolute; width:7px; height:7px; border-radius:50%; background:var(--gold); box-shadow:0 0 18px var(--gold); }
+    .ring::before { top:50px; left:70px; } .ring::after { right:35px; bottom:90px; }
+    @keyframes rotate { to { transform:rotate(360deg); } }
+    .section { padding:76px 0; }
+    .section-head { text-align:center; max-width:670px; margin:0 auto 35px; }
+    .kicker { color:var(--gold); font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:2px; }
+    h2 { font-size:clamp(28px,4vw,42px); letter-spacing:-1.2px; margin:12px 0; }
+    .section-head p { color:var(--muted); font-size:14px; line-height:1.75; }
+    .support-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:15px; }
+    .support-card { padding:24px 20px; border-radius:19px; border:1px solid rgba(232,196,107,.14); background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012)); transition:transform .25s,border-color .25s,box-shadow .25s; }
+    .support-card:hover { transform:translateY(-6px); border-color:rgba(232,196,107,.55); box-shadow:0 16px 38px rgba(0,0,0,.25),0 0 28px rgba(232,196,107,.06); }
+    .support-icon { width:48px; height:48px; display:grid; place-items:center; border-radius:15px; border:1px solid rgba(232,196,107,.28); color:var(--gold); background:rgba(232,196,107,.07); font-size:22px; margin-bottom:19px; }
+    .support-card h3 { font-size:15px; margin-bottom:9px; } .support-card p { color:var(--muted); font-size:12px; line-height:1.7; min-height:60px; }
+    .text-btn { margin-top:17px; color:var(--gold-soft); background:none; border:0; font-size:12px; font-weight:800; }
+    .text-btn span { display:inline-block; transition:transform .2s; } .text-btn:hover span { transform:translateX(4px); }
+    .banner { padding:30px; border:1px solid rgba(232,196,107,.25); border-radius:24px; display:flex; align-items:center; justify-content:space-between; gap:24px; background:radial-gradient(ellipse at 90% 20%,rgba(232,196,107,.12),transparent 45%),linear-gradient(130deg,#171714,#101110); }
+    .banner h2 { font-size:clamp(23px,3vw,32px); margin:0 0 8px; } .banner p { color:var(--muted); font-size:13px; line-height:1.7; max-width:600px; }
+    .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .step { padding:24px; border-top:1px solid var(--line); background:linear-gradient(180deg,rgba(232,196,107,.045),transparent); }
+    .step-num { color:var(--gold); font-size:11px; letter-spacing:2px; font-weight:800; }
+    .step h3 { margin:12px 0 8px; font-size:16px; } .step p { color:var(--muted); font-size:12px; line-height:1.7; }
+    .faq-list { max-width:780px; margin:auto; display:grid; gap:10px; }
+    details { background:#111211; border:1px solid rgba(232,196,107,.15); border-radius:14px; padding:17px 20px; }
+    summary { cursor:pointer; font-weight:700; font-size:13px; color:#e9e4d8; list-style:none; display:flex; justify-content:space-between; gap:18px; }
+    summary::-webkit-details-marker { display:none; } summary::after { content:"+"; color:var(--gold); font-size:18px; line-height:1; } details[open] summary::after { content:"−"; }
+    details p { color:var(--muted); font-size:12px; line-height:1.8; padding-top:12px; }
+    footer { border-top:1px solid rgba(232,196,107,.14); padding:28px 0; margin-top:25px; }
+    .footer-row { display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; color:var(--muted); font-size:11px; }
+    .footer-links { display:flex; gap:18px; flex-wrap:wrap; }
+    .notice { color:#8f8c83; font-size:10px; line-height:1.7; margin-top:13px; max-width:800px; }
+    /* Modal */
+    .modal { display:none; position:fixed; inset:0; z-index:100; padding:20px; background:rgba(0,0,0,.78); backdrop-filter:blur(10px); overflow-y:auto; align-items:center; justify-content:center; }
+    .modal.open { display:flex; animation:fadeIn .2s ease; }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    .modal-panel { width:min(100%,540px); max-height:calc(100vh - 40px); overflow:auto; position:relative; padding:30px; border-radius:24px; border:1px solid rgba(232,196,107,.38); background:linear-gradient(145deg,#191a17,#0d0e0d); box-shadow:0 25px 90px rgba(0,0,0,.7),0 0 40px rgba(232,196,107,.08); }
+    .modal-close { position:absolute; right:18px; top:15px; width:36px; height:36px; border-radius:10px; border:1px solid var(--line); background:#151613; color:var(--gold); font-size:23px; }
+    .modal-panel h2 { font-size:27px; margin:0 45px 7px 0; } .modal-intro { color:var(--muted); font-size:12px; line-height:1.7; margin-bottom:23px; }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .field { display:flex; flex-direction:column; gap:7px; } .field.full { grid-column:1/-1; }
+    .field label { color:#d5d0c3; font-size:11px; font-weight:700; }
+    .field input,.field select,.field textarea { width:100%; border:1px solid #38372f; border-radius:11px; background:#0b0c0b; color:var(--text); padding:12px 13px; outline:none; font-size:12px; transition:border-color .2s,box-shadow .2s; }
+    .field textarea { min-height:90px; resize:vertical; }
+    .field input:focus,.field select:focus,.field textarea:focus { border-color:var(--gold2); box-shadow:0 0 0 3px rgba(232,196,107,.08); }
+    .field input::placeholder,.field textarea::placeholder { color:#77756e; }
+    .form-note { font-size:10px; color:#928e83; line-height:1.65; margin:14px 0; }
+    .form-status { display:none; padding:12px 14px; margin-top:12px; border-radius:10px; font-size:12px; line-height:1.6; }
+    .form-status.show { display:block; } .form-status.success { background:rgba(141,224,173,.08); border:1px solid rgba(141,224,173,.28); color:var(--success); } .form-status.error { background:rgba(255,156,145,.08); border:1px solid rgba(255,156,145,.25); color:var(--danger); }
+    .submit-btn { width:100%; padding:14px; border-radius:12px; border:0; background:linear-gradient(135deg,var(--gold-soft),var(--gold2)); color:#17130a; font-weight:900; font-size:13px; }
+    .submit-btn:disabled { opacity:.65; cursor:wait; }
+    .hp { position:absolute!important; left:-9999px!important; width:1px!important; height:1px!important; overflow:hidden!important; }
+    .reveal { opacity:0; transform:translateY(18px); transition:opacity .65s ease,transform .65s ease; } .reveal.visible { opacity:1; transform:translateY(0); }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; scroll-behavior:auto!important; } .reveal { opacity:1; transform:none; } }
+    @media(max-width:900px) {
+      .hero { gap:25px; grid-template-columns:1fr  .82fr; padding:55px 0; }
+      .photo-frame { height:370px; } .hero-visual { min-height:380px; }
+      .support-grid { grid-template-columns:repeat(2,1fr); } .floating-top { left:-12px; } .floating-bottom { right:-10px; }
+    }
+    @media(max-width:680px) {
+      .wrap { width:min(100% - 30px,540px); }
+      .nav { min-height:68px; } .brand-name { font-size:17px; }
+      .menu-toggle { display:block; } .nav-cta { display:none; }
+      .nav-links { display:none; position:absolute; left:15px; right:15px; top:74px; padding:16px; flex-direction:column; align-items:stretch; gap:0; border:1px solid var(--line); border-radius:15px; background:#10110f; box-shadow:var(--shadow); }
+      .nav-links.open { display:flex; } .nav-links a { padding:13px 8px; }
+      .hero { grid-template-columns:1fr; padding:46px 0 40px; gap:35px; }
+      h1 { letter-spacing:-1.7px; font-size:clamp(39px,11vw,58px); }
+      .hero-copy { font-size:14px; } .hero-visual { min-height:350px; }
+      .photo-frame { width:calc(100% - 28px); height:350px; }
+      .ring { width:350px; height:350px; } .floating-top { top:18px; left:0; } .floating-bottom { bottom:20px; right:0; }
+      .section { padding:54px 0; } .support-grid { gap:11px; } .support-card { padding:19px 15px; } .support-card p { min-height:unset; }
+      .banner { align-items:flex-start; flex-direction:column; padding:23px; }
+      .steps { grid-template-columns:1fr; gap:8px; } .step { padding:20px; }
+      .modal-panel { padding:25px 18px; } .form-grid { grid-template-columns:1fr; } .field.full { grid-column:auto; }
+      .footer-row { align-items:flex-start; flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#home" aria-label="HelpCare VIP home">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span class="brand-name">HelpCare <span>VIP</span></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#services">Support Services</a><a href="#how">How It Works</a><a href="#faq">FAQ</a>
+      </nav>
+      <button class="nav-cta" data-open-modal>Get Support&nbsp; ↗</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap hero" id="home">
+      <div class="hero-content reveal">
+        <div class="eyebrow"><span class="pulse"></span> Premium customer assistance</div>
+        <h1>Support that feels <span class="gold-text">VIP.</span></h1>
+        <p class="hero-copy">Need help with a payment or account issue? Tell our support team what happened. We’ll help you understand the next steps through a clear, secure support process.</p>
+        <div class="hero-actions">
+          <button class="btn" data-open-modal>Submit a Request&nbsp; ↗</button>
+          <a class="btn-outline" href="#services">Explore Support ↓</a>
+        </div>
+        <div class="trust-row"><span><b class="check">✓</b> Privacy-conscious form</span><span><b class="check">✓</b> Clear request tracking</span><span><b class="check">✓</b> Mobile friendly</span></div>
+      </div>
+      <div class="hero-visual reveal" aria-label="Customer support representative image">
+        <div class="ring"></div>
+        <div class="photo-frame">
+          <img id="agentPhoto" src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=85" alt="Professional customer care team member at work" loading="eager">
+          <div class="photo-placeholder" id="photoPlaceholder">
+            <div class="avatar">♙</div><strong>Professional Support</strong>
+            <small>Replace the image URL in the HTML with your preferred customer care agent photo.</small>
+          </div>
+        </div>
+        <div class="floating-card floating-top"><strong>Dedicated Support</strong><small>Here to guide your next step</small></div>
+        <div class="floating-card floating-bottom"><span class="float-icon">✦</span><span><strong>HelpCare VIP</strong><small>Support made simple</small></span></div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="wrap">
+        <div class="section-head reveal"><div class="kicker">Support categories</div><h2>How can we <span class="gold-text">help you?</span></h2><p>Choose the issue that best matches your situation. Add the details you’re comfortable sharing so the team can review your request.</p></div>
+        <div class="support-grid">
+          <article class="support-card reveal"><div class="support-icon">↗</div><h3>Deposit Issue</h3><p>For a deposit that is delayed, pending, or not reflected in your account.</p><button class="text-btn" data-problem="deposit">Get help <span>→</span></button></article>
+          <article class="support-card reveal"><div class="support-icon">↙</div><h3>Withdrawal Issue</h3><p>Ask about a withdrawal that is pending, processing, or needs review.</p><button class="text-btn" data-problem="withdrawal">Get help <span>→</span></button></article>
+          <article class="support-card reveal"><div class="support-icon">◷</div><h3>Payment Not Received</h3><p>Share the transaction reference and date if a payment has not arrived.</p><button class="text-btn" data-problem="not_received">Get help <span>→</span></button></article>
+          <article class="support-card reveal"><div class="support-icon">◎</div><h3>Account & Email</h3><p>Get guidance with email verification or general account-access questions.</p><button class="text-btn" data-problem="account_email">Get help <span>→</span></button></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="how">
+      <div class="banner reveal">
+        <div><div class="kicker">A simple process</div><h2>Let’s get your issue <span class="gold-text">moving.</span></h2><p>Send a request with the relevant details. Never share your password, one-time passcode, PIN, or full card details with support.</p></div>
+        <button class="btn" data-open-modal>Open Support Form&nbsp; ↗</button>
+      </div>
+      <div class="section-head reveal" style="margin-top:70px"><div class="kicker">Three easy steps</div><h2>From question to <span class="gold-text">next steps.</span></h2></div>
+      <div class="steps">
+        <article class="step reveal"><div class="step-num">STEP 01</div><h3>Tell us what happened</h3><p>Choose a support category and describe the issue in plain language.</p></article>
+        <article class="step reveal"><div class="step-num">STEP 02</div><h3>Include useful details</h3><p>Share a contact email and, if relevant, the amount or transaction reference. Don’t include secret credentials.</p></article>
+        <article class="step reveal"><div class="step-num">STEP 03</div><h3>Wait for a response</h3><p>Your request must be delivered to a configured support endpoint before a team member can review it.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="wrap">
+        <div class="section-head reveal"><div class="kicker">Good to know</div><h2>Frequently asked <span class="gold-text">questions.</span></h2><p>A few reminders to help keep your support request useful and safe.</p></div>
+        <div class="faq-list">
+          <details class="reveal"><summary>Should I enter my account password?</summary><p>No. HelpCare VIP’s form does not ask for your account password, OTP, PIN, or recovery phrase. Never send these details in chat or support requests.</p></details>
+          <details class="reveal"><summary>What details should I include for a payment issue?</summary><p>Include the approximate amount, date/time, issue category, and a transaction reference if you have one. Avoid sharing full card or bank credentials.</p></details>
+          <details class="reveal"><summary>Does this page send my request automatically?</summary><p>Only after a valid server endpoint is configured. This front-end demo will show a setup message until you connect your own secure backend.</p></details>
+          <details class="reveal"><summary>How soon will I get a response?</summary><p>Response times depend on the actual support team. This page does not guarantee a specific resolution time.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-row">
+        <a class="brand" href="#home"><span class="brand-mark">✦</span><span class="brand-name">HelpCare <span>VIP</span></span></a>
+        <div class="footer-links"><a href="#services">Services</a><a href="#faq">FAQ</a><a href="#home">Back to top ↑</a></div>
+        <span>© <span id="year"></span> HelpCare VIP. All rights reserved.</span>
+      </div>
+      <p class="notice">Demo template: replace the placeholder support endpoint with your own secure backend and publish an appropriate privacy notice before collecting personal information. HelpCare VIP is not affiliated with any gaming platform unless explicitly stated by the site owner.</p>
+    </div>
+  </footer>
+
+  <div class="modal" id="supportModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-panel">
+      <button class="modal-close" id="closeModal" aria-label="Close support form">×</button>
+      <div class="kicker">We’re listening</div><h2 id="modalTitle">Submit a <span class="gold-text">support request.</span></h2>
+      <p class="modal-intro">Share the essentials below. Never submit a password, OTP, PIN, or full payment-card details.</p>
+      <form id="supportForm">
+        <div class="hp" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+        <div class="form-grid">
+          <div class="field"><label for="email">Email address *</label><input type="email" id="email" name="email" required maxlength="160" autocomplete="email" placeholder="you@example.com"></div>
+          <div class="field"><label for="phone">Phone (optional)</label><input type="tel" id="phone" name="phone" maxlength="30" autocomplete="tel" placeholder="Contact number"></div>
+          <div class="field"><label for="amount">Amount (optional)</label><input type="number" id="amount" name="amount" min="0" max="999999999" step="0.01" placeholder="0.00"></div>
+          <div class="field"><label for="problem">Issue type *</label><select id="problem" name="problem" required><option value="">Choose an issue</option><option value="deposit">Deposit issue</option><option value="withdrawal">Withdrawal issue</option><option value="withdrawal_processing">Withdrawal processing</option><option value="not_received">Payment not received</option><option value="account_email">Account / email verification</option><option value="other">Other support question</option></select></div>
+          <div class="field full"><label for="reference">Transaction reference (optional)</label><input id="reference" name="reference" maxlength="100" placeholder="Reference ID — never enter full card/bank details"></div>
+          <div class="field full"><label for="details">Describe the issue *</label><textarea id="details" name="details" required minlength="8" maxlength="1500" placeholder="Tell us what happened, including relevant dates or error messages..."></textarea></div>
+        </div>
+        <p class="form-note">By submitting, you’re sharing these details for support purposes. The form will only transmit data once a secure server endpoint has been configured by the site owner.</p>
+        <button class="submit-btn" type="submit" id="submitBtn">Send Support Request&nbsp; ↗</button>
+        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // IMPORTANT: Set this to your own HTTPS backend endpoint before production.
+    // Keep Telegram bot tokens and all private credentials on the server, never here.
+    const SUPPORT_API_URL = ""; // Example: "https://your-domain.com/api/support"
+
+    const modal = document.getElementById("supportModal");
+    const closeModalBtn = document.getElementById("closeModal");
+    const form = document.getElementById("supportForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const statusBox = document.getElementById("formStatus");
+    const problemSelect = document.getElementById("problem");
+    let lastFocusedElement = null;
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function openModal(problem = "") {
+      lastFocusedElement = document.activeElement;
+      if (problem) problemSelect.value = problem;
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+      window.setTimeout(() => document.getElementById("email").focus(), 80);
+    }
+    function closeModal() {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+      if (lastFocusedElement && typeof lastFocusedElement.focus === "function") lastFocusedElement.focus();
+    }
+    document.querySelectorAll("[data-open-modal]").forEach(el => el.addEventListener("click", () => openModal()));
+    document.querySelectorAll("[data-problem]").forEach(el => el.addEventListener("click", () => openModal(el.dataset.problem)));
+    closeModalBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && modal.classList.contains("open")) closeModal(); });
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    menuToggle.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(open));
+      menuToggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+    });
+    navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }));
+
+    const agentPhoto = document.getElementById("agentPhoto");
+    agentPhoto.addEventListener("error", () => {
+      agentPhoto.style.display = "none";
+      document.getElementById("photoPlaceholder").style.display = "flex";
+    });
+
+    const revealEls = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); }
+      }), { threshold: 0.12 });
+      revealEls.forEach(el => observer.observe(el));
+    } else revealEls.forEach(el => el.classList.add("visible"));
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      statusBox.className = "form-status";
+      statusBox.textContent = "";
+      if (document.getElementById("website").value) return; // simple honeypot
+      if (!form.reportValidity()) return;
+
+      if (!SUPPORT_API_URL) {
+        statusBox.className = "form-status show error";
+        statusBox.textContent = "The support form design is ready, but no secure backend is connected yet. Ask your developer to configure SUPPORT_API_URL before using this form for real requests.";
+        return;
+      }
+
+      const payload = {
+        email: document.getElementById("email").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        amount: document.getElementById("amount").value,
+        problem: problemSelect.value,
+        reference: document.getElementById("reference").value.trim(),
+        details: document.getElementById("details").value.trim()
+      };
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending securely…";
+      try {
+        const response = await fetch(SUPPORT_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          credentials: "omit"
+        });
+        if (!response.ok) throw new Error("Request could not be delivered.");
+        statusBox.className = "form-status show success";
+        statusBox.textContent = "Your request was sent. Please use your normal support channel for follow-up.";
+        form.reset();
+      } catch (err) {
+        statusBox.className = "form-status show error";
+        statusBox.textContent = "We couldn’t send your request right now. Please try again later or contact the site owner.";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send Support Request ↗";
+      }
+    });
+  </script>
+</body>
+</html>
